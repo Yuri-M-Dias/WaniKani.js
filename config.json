@@ -22,8 +22,32 @@
       "method": "post",
       "body": "review"
     },
+    "review_statistics": {
+      "url": "/review_statistics",
+      "method": "get"
+    },
+    "study_materials": {
+      "url": "/study_materials",
+      "method": "get"
+    },
+    "subjects": {
+      "url": "/subjects",
+      "method": "get"
+    },
+    "summary": {
+      "url": "/summary",
+      "method": "summary"
+    },
     "srs": {
       "url": "/spaced_repetition_systems",
+      "method": "get"
+    },
+    "user": {
+      "url": "/user",
+      "method": "get"
+    },
+    "voice_actors": {
+      "url": "/voice_actors",
       "method": "get"
     }
   }

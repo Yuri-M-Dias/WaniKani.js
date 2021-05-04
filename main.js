@@ -1,3 +1,6 @@
-const endpoints = require('./lib/endpoints');
+'use strict';
 
-// There's nothing here yet.
+module.exports = {
+  Collection: require('./lib/collection'),
+  Member: require('./lib/member')
+}
