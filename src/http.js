@@ -17,6 +17,9 @@ class Http {
 
     if (data) {
       if (data.revision) headers['Wanikani-Revision'] = data.revision;
+      if (data.modified) headers['If-Modified-Since'] = data.modified;
+      if (data.modified) headers['If-None-Match'] = data.nonematch;
+      
       if (data.filter) {
         url = url + '?';
         for (const key in data.filter) {
@@ -24,6 +27,8 @@ class Http {
         }
       }
     }
+
+    console.log(url);
 
     try {
       response = await axios.get(url, { headers: headers });
@@ -47,6 +52,8 @@ class Http {
 
     if (data) {
       if (data.revision) headers['Wanikani-Revision'] = data.revision;
+      if (data.modified) headers['If-Modified-Since'] = data.modified;
+
       if (data.filter) {
         url = url + '?';
         for (const key in data.filter) {

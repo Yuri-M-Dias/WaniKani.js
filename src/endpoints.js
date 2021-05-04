@@ -105,6 +105,9 @@ module.exports = class Endpoints {
     return await http(this.token, endpoints.srs.method, url, data);
   }
 
+  /**
+   * Gets general information pertaining to a specific user.
+   */
   async user(data) {
     var response = await http(this.token, endpoints.user.method, endpoints.user.url, data);
 
