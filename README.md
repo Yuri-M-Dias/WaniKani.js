@@ -84,7 +84,7 @@ console.log(await member.srs); // Will return the below JSON
 
 Example Console Output
 
-```json
+```
 {
   object: 'collection',
   url: 'https://api.wanikani.com/v2/spaced_repetition_systems',
@@ -146,8 +146,9 @@ Following is a list of all `Endpoint` functions:
 > - An `id` value will be parsed to select only that specific id (for instance, selecting a single assignment by ID, rather than all assignments).
 > - A `revision` value will be parsed to select data from a specific WaniKani revision. https://docs.api.wanikani.com/20170710/#revisions-aka-versioning
 > - A `filter` object will be parsed to include all values inside the GET request. For example, the following would be parsed as `?subject_ids=6,page_after_id=2`:
-```json
+```
 filter {
   subject_ids: 6,
   page_after_id: 2
-}```
+}
+```
