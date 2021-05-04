@@ -1,0 +1,30 @@
+{
+  "baseURL": "https://api.wanikani.com/v2",
+  "endpoints": {
+    "assignments": {
+      "url": "/assignments",
+      "method": "get"
+    },
+    "level_progressions": {
+      "url": "/level_progressions",
+      "method": "get"
+    },
+    "resets": {
+      "url": "/resets",
+      "method": "get"
+    },
+    "reviews": {
+      "url": "/reviews",
+      "method": "get"
+    },
+    "create_review": {
+      "url": "/reviews",
+      "method": "post",
+      "body": "review"
+    },
+    "srs": {
+      "url": "/spaced_repetition_systems",
+      "method": "get"
+    }
+  }
+}
