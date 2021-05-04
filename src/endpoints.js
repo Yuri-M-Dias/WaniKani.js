@@ -46,6 +46,9 @@ module.exports = class Endpoints {
     return await http(this.token, endpoints.reviews.method, url, data);
   }
 
+  /**
+   * Create a review for a user.
+  */
   async create_review(data) {
     if (data && data.assignment_id && data.subject_id && data.incorrect_meaning_answers	&& data.incorrect_reading_answers);
 
@@ -53,7 +56,7 @@ module.exports = class Endpoints {
   }
 
   /**
-   * Gets information about a user's resets.
+   * Gets information about a user's review statistics.
    */
    async review_stats(data) {
     var url = endpoints.review_statistics.url;
@@ -63,7 +66,7 @@ module.exports = class Endpoints {
   }
 
   /**
-   * Gets information about a user's resets.
+   * Gets information about a user's study materials.
    */
    async study_materials(data) {
     var url = endpoints.study_materials.url;
@@ -73,9 +76,9 @@ module.exports = class Endpoints {
   }
 
   /**
- * Gets information about a user's resets.
- */
-    async subjects(data) {
+   * Gets information about WaniKani's subjects.
+   */
+  async subjects(data) {
     var url = endpoints.subjects.url;
     if (data && data.id) url = url + '/' + data.id;
 
@@ -83,7 +86,7 @@ module.exports = class Endpoints {
   }
 
   /**
-   * Gets information about a user's resets.
+   * Gets a summary of a user's upcoming lessons for a user.
    */
    async summary(data) {
     var url = endpoints.summary.url;
@@ -93,7 +96,7 @@ module.exports = class Endpoints {
   }
 
   /**
-   * Gets information about a user's resets.
+   * Gets information about general spaced repetition systems.
    */
    async srs(data) {
     var url = endpoints.srs.url;
@@ -103,11 +106,15 @@ module.exports = class Endpoints {
   }
 
   async user(data) {
-    return await http(this.token, endpoints.user.method, endpoints.user.url, data);
+    var response = await http(this.token, endpoints.user.method, endpoints.user.url, data);
+
+    if (response.data) response = response.data;
+
+    return response;
   }
 
   /**
-   * Gets information about a user's resets.
+   * Gets information about WaniKani's voice actors.
    */
    async voice_actors(data) {
     var url = endpoints.voice_actors.url;

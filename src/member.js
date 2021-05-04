@@ -5,6 +5,7 @@ module.exports = class Member {
     const endpoint = new endpoints(token);
 
     this.token = token;
+    this.timestamp = new Date();
     this.user = endpoint.user();
     this.lessons = endpoint.progressions();
     this.resets = endpoint.resets();
@@ -14,7 +15,10 @@ module.exports = class Member {
     this.summary = endpoint.summary();
   }
 
-  async update_user() {
+  /*
+   * 
+   */
+  async update_user(data) {
     // Under construction
 
     /*
