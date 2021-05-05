@@ -1,19 +1,19 @@
 {
-  "name": "wk-wrapper",
+  "name": "wanikani.js",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ['wanikani', 'api', 'wrapper'],
+  "author": "Zachary Montgomery",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zmontgo/Nodejs-WaniKani.git"
+    "url": "https://github.com/zmontgo/WaniKani.js.git"
   }
 }
