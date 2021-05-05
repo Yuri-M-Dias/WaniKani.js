@@ -4,11 +4,14 @@
 > This library is usable, but still under construction. If you experience a bug, please report it under Github issues on our repo: https://github.com/zmontgo/Nodejs-WaniKani/issues.
 
 ## Table of Contents
+> - [Table of Contents](#table-of-contents)
 > - [Description](#description)
-> - [Description](#description)
-> - [Description](#description)
-> - [Description](#description)
-> - [Description](#description)
+> - [Data Groups](#data-groups)
+> > - [Members](#member)
+> > - [Collections](#collections)
+> > - [Examples](#examples)
+> - [Endpoints](#endpoints)
+> - [Utilities](#utilities)
 
 ## Description
 
