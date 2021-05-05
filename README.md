@@ -7,7 +7,7 @@ A very thin wrapper between the WaniKani API and your Node.js application.
 As with most wrappers, its strengths are twofold: simplifying and parsing. **This wrapper does not cache.**
 
 ## Data Groups
-There are two data groups that contain all information pertaining to either WaniKani as a whole (`Collection`) or a specific user (`Member`). Avoid calling these too often, as they simulteneously call many endpoints. Instead, use these for caching, and update your cache periodically with the returned timestamp.
+Since it's very likely you will want to cache large amounts of data, WaniKani.js offers two data groups that contain all information pertaining to either WaniKani as a whole (`Collection`) or a specific user (`Member`). Avoid calling these too often, as they simulteneously call many endpoints. Instead, use these solely for caching, and update your cache periodically with the returned timestamp.
 
 A `Collection` object contains WaniKani's spaced repetition systems, subjects, and voice actors. A `Member` object contains information pertaining to a specific user from WaniKani, including user information, progressions, resets, reviews, review statistics, study materials, and summaries. Both objects require a WaniKani user token to be selected, or they will return a `401 Unauthorized` error.
 
@@ -33,7 +33,9 @@ Member {
 }
 ```
 
-Additionally, you may update the member as appropriate with the following functions:
+Creating a `Member` object also allows specifying filters that are applied to every endpoint (avoid trying to get a specific entry through this, however. Use endpoint functions with specific filters instead). Use this to quickly fetch updated data, and use our `mergeMembers()` function to merge old and new `Member` data together.
+
+Additionally, you may update a WaniKani user as appropriate with the following functions:
 
 ```javascript
   Member.update_user(data); // https://docs.api.wanikani.com/20170710/#update-user-information
@@ -152,3 +154,11 @@ filter {
   page_after_id: 2
 }
 ```
+
+## Utilities
+
+WaniKani.js offers a few utility functions you may need.
+
+> `parseDate(date)` parses a JavaScript `Date` object for use in `If-Modified-Since` filters.
+> `mergeMembers(old_member, new_member)` combines a `Member`-like object (presumably from a database or local cache) and a new `Member` object, to allow you to select updated data and merge the data for faster requests. Note that it does not care if you `await` the specific fields below the new `Member` object; you may select it and pass it directly into the function. It does expect all fields to be present in both objects, but it does not need to be an instance of the `Member` class.
+> `mergeCollections(old_collection, new_collection)` is like `mergeMembers()` but merges collections.
