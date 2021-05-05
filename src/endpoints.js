@@ -52,7 +52,7 @@ module.exports = class Endpoints {
   async create_review(data) {
     if (!data || !data.assignment_id || !data.subject_id || !data.incorrect_meaning_answers || !data.incorrect_reading_answers) return false;
 
-    return await http(this.token, endpoints.create_review, endpoints.create_review.url, data);
+    return await http(this.token, endpoints.create_review.method, endpoints.create_review.url, data, endpoints.create_review.body);
   }
 
   /**
@@ -81,7 +81,7 @@ module.exports = class Endpoints {
   async create_study_material(data) {
     if (!data || !data.subject_id) return false;
 
-    return await http(this.token, endpoints.create_study_material, endpoints.create_study_material.url, data);
+    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, endpoints.create_study_material.body);
   }
 
   /**
