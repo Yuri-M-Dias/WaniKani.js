@@ -30,6 +30,11 @@
       "url": "/study_materials",
       "method": "get"
     },
+    "create_study_material": {
+      "url": "/study_materials",
+      "method": "post",
+      "body": "study_material"
+    },
     "subjects": {
       "url": "/subjects",
       "method": "get"
