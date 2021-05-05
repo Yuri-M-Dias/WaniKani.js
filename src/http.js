@@ -4,7 +4,6 @@ const config = require('../config.json');
 module.exports = async function req(token, method, endpoint, data=null, body=null) {
   var url = config.baseURL + endpoint;
   
-  var response;
   var headers = {
     Authorization: 'Bearer ' + token
   };
@@ -30,12 +29,14 @@ module.exports = async function req(token, method, endpoint, data=null, body=nul
     }
   }
 
-  if (typeof(Http[method]) === 'function') return Http[method](token, url, headers, body);
+  if (typeof(Http[method]) === 'function') return Http[method](url, headers, body);
   else return false;
 }
 
 class Http {
-  static async get(token, url, headers) {
+  static async get(url, headers) {
+    var response;
+
     try {
       response = await axios.get(url, { headers: headers });
     } catch(err) {
@@ -49,7 +50,9 @@ class Http {
     return response.data;
   }
 
-  static async post(token, url, headers, body) {
+  static async post(url, headers, body) {
+  var response;
+
     try {
       response = await axios.post(
         url,
@@ -69,7 +72,9 @@ class Http {
     return response.data;
   }
   
-  static async put(token, url, data, body) {
+  static async put(url, headers, body) {
+    var response;
+    
     try {
       response = await axios.put(
         url,
