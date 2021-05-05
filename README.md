@@ -161,5 +161,5 @@ filter {
 WaniKani.js offers a few utility functions you may need.
 
 > - `parseDate(date)` parses a JavaScript `Date` object for use in `If-Modified-Since` filters.
-> - `mergeMembers(old_member, new_member)` combines a `Member`-like object (presumably from a database or local cache) and a new `Member` object, to allow you to select updated data and merge the data for faster requests. Note that it `await`s the specific fields inside the new `Member` object; you may select it and pass it directly into the function. It does expect all fields to be present in both objects, but it does not need to be an instance of the `Member` class.
-> - `mergeCollections(old_collection, new_collection)` is like `mergeMembers()` but merges collections.
+> - `mergeMembers(old_member, new_member)` combines a `Member`-like object (presumably from a database or local cache) and a new `Member` object, to allow you to select updated data and merge the data for faster requests. Note that it `await`s the specific fields inside the new `Member` object; you may select it and pass it directly into the function. It expects [all fields](https://github.com/zmontgo/WaniKani.js/blob/main/README.md#member) to be present in both objects, but it does not need to be an instance of the `Member` class.
+> - `mergeCollections(old_collection, new_collection)` is like `mergeMembers()` but merges collections. It expects [all fields](https://github.com/zmontgo/WaniKani.js/blob/main/README.md#collection) to be present in both objects.
