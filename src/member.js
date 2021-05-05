@@ -69,61 +69,15 @@ module.exports = class Member {
     */
   }
 
-  async create_review() {
-    // Under construction
-
-    /*
-      new Request('https://api.wanikani.com/v2/' + apiEndpointPath, {
-        method: 'POST',
-        headers: requestHeaders,
-        body: {
-          "review": {
-            "assignment_id": 1422,
-            "incorrect_meaning_answers": 1,
-            "incorrect_reading_answers": 2,
-            "created_at": "2017-09-30T01:42:13.453291Z"
-          }
-        }
-      });
-
-      ---
-
-      Name	                    Data Type	    Required?	Description
-      assignment_id	            Integer	      true	    Unique identifier of the assignment. This or subject_id must be set.
-      subject_id	              Integer     	true	    Unique identifier of the subject. This or assignment_id must be set.
-      incorrect_meaning_answers	Integer	      true	    Must be zero or a positive number. This is the number of times the meaning was answered incorrectly.
-      incorrect_reading_answers	Integer     	true	    Must be zero or a positive number. This is the number of times the reading was answered incorrectly. Note that subjects with a type or radical do not quiz on readings. Thus, set this value to 0.
-      created_at	              Date	        false 	  Timestamp when the review was completed. Defaults to the time of the request if omitted from the request body. Must be in the past, but after assignment.available_at.
-    */
+  async create_review(data) {
+    if (!data || !data.assignment_id || !data.subject_id || !data.incorrect_meaning_answers || !data.incorrect_reading_answers) return false;
+    return await endpoint.create_review(data);
   }
 
-  async create_study_material() {
+  async create_study_material(data) {
     // Under construction
-
-    /*
-      new Request('https://api.wanikani.com/v2/' + apiEndpointPath, {
-        method: 'POST',
-        headers: requestHeaders,
-        body: {
-          "study_material": {
-            "subject_id": 2,
-            "meaning_note": "The two grounds is too much",
-            "reading_note": "This is tsu much",
-            "meaning_synonyms": [
-              "double"
-            ]
-          }
-        }
-      });
-
-      ---
-
-      Name	            Data Type	        Required?	Description
-      subject_id	      Integer	          true	    Unique identifier of the subject.
-      meaning_note	    String	          false	    Meaning notes specific for the subject.
-      reading_note	    String	          false	    Reading notes specific for the subject.
-      meaning_synonyms	Array of Strings	false	    Meaning synonyms for the subject.
-      */
+    if (!data || !data.subject_id) return false;
+    return await endpoint.create_study_material(data);
   }
 
   async update_study_material() {
