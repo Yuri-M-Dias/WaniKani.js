@@ -17,11 +17,6 @@
       "url": "/reviews",
       "method": "get"
     },
-    "create_review": {
-      "url": "/reviews",
-      "method": "post",
-      "body": "review"
-    },
     "review_statistics": {
       "url": "/review_statistics",
       "method": "get"
@@ -29,11 +24,6 @@
     "study_materials": {
       "url": "/study_materials",
       "method": "get"
-    },
-    "create_study_material": {
-      "url": "/study_materials",
-      "method": "post",
-      "body": "study_material"
     },
     "subjects": {
       "url": "/subjects",
@@ -54,6 +44,31 @@
     "voice_actors": {
       "url": "/voice_actors",
       "method": "get"
+    },
+    "create_review": {
+      "url": "/reviews",
+      "method": "post",
+      "body": "review"
+    },
+    "create_study_material": {
+      "url": "/study_materials",
+      "method": "post",
+      "body": "study_material"
+    },
+    "update_study_material": {
+      "url": "/study_materials",
+      "method": "put",
+      "body": "study_material"
+    },
+    "start_assignment": {
+      "url": "assignments",
+      "method": "put",
+      "body": ""
+    },
+    "update_user": {
+      "url": "/user",
+      "method": "put",
+      "body": "user"
     }
   },
   "days": [
