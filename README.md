@@ -1,4 +1,5 @@
-# Node.js Wrapper for WaniKani
+# WaniKani.js
+## A Node.js Wrapper for the WaniKani API
 
 ```This library is usable, but still under construction. If you experience a bug, please report it under Github issues on our repo: https://github.com/zmontgo/Nodejs-WaniKani.```
 
