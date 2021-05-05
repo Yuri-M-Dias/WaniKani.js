@@ -86,7 +86,9 @@ const wk = require('wanikani.js');
 
 const member = new wk.Member('USER_TOKEN');
 
-console.log(await member.user.username); // Will return the username associated with the user token given
+const user = await member.user;
+
+console.log(user.username); // Will return the username associated with the user token given
 ```
 
 ```javascript
