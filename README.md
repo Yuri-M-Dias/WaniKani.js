@@ -1,11 +1,11 @@
 # WaniKani.js
 ## A Node.js Wrapper for the WaniKani API
 
-```This library is usable, but still under construction. If you experience a bug, please report it under Github issues on our repo: https://github.com/zmontgo/Nodejs-WaniKani.```
+> This library is usable, but still under construction. If you experience a bug, please report it under Github issues on our repo: https://github.com/zmontgo/Nodejs-WaniKani/issues.
 
 A very thin wrapper between the WaniKani API and your Node.js application.
 
-As with most wrappers, its strengths are twofold: simplifying and parsing. **This wrapper does not cache.**
+As with most wrappers, its strengths are twofold: simplifying and parsing. **This wrapper does not cache data for you.**
 
 ## Data Groups
 Since it's very likely you will want to cache large amounts of data, WaniKani.js offers two data groups that contain all information pertaining to either WaniKani as a whole (`Collection`) or a specific user (`Member`). Avoid calling these too often, as they simulteneously call many endpoints. Instead, use these solely for caching, and update your cache periodically with the returned timestamp.
