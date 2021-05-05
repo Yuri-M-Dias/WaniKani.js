@@ -47,15 +47,6 @@ module.exports = class Endpoints {
   }
 
   /**
-   * Create a review for a user.
-  */
-  async create_review(data) {
-    if (!data || !data.assignment_id || !data.subject_id || !data.incorrect_meaning_answers || !data.incorrect_reading_answers) return false;
-
-    return await http(this.token, endpoints.create_review.method, endpoints.create_review.url, data, endpoints.create_review.body);
-  }
-
-  /**
    * Gets information about a user's review statistics.
    */
    async review_stats(data) {
@@ -73,15 +64,6 @@ module.exports = class Endpoints {
     if (data && data.id) url = url + '/' + data.id;
 
     return await http(this.token, endpoints.study_materials.method, url, data);
-  }
-  
-  /**
-   * Create a study material for a user.
-  */
-  async create_study_material(data) {
-    if (!data || !data.subject_id) return false;
-
-    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, endpoints.create_study_material.body);
   }
 
   /**
@@ -133,5 +115,38 @@ module.exports = class Endpoints {
     if (data && data.id) url = url + '/' + data.id;
 
     return await http(this.token, endpoints.voice_actors.method, url, data);
+  }
+  
+  /**
+   * Create a review for a user.
+  */
+  async create_review(data) {
+    if (!data || !data.assignment_id || !data.subject_id || !data.incorrect_meaning_answers || !data.incorrect_reading_answers) return false;
+
+    return await http(this.token, endpoints.create_review.method, endpoints.create_review.url, data, endpoints.create_review.body);
+  }
+  
+  /**
+   * Create a study material for a user.
+  */
+  async create_study_material(data) {
+    if (!data || !data.subject_id) return false;
+
+    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, endpoints.create_study_material.body);
+  }
+  
+  async update_user(data) {
+    return await http(this.token, endpoints.update_user.method, endpoints.update_user.url, data, endpoints.update_user.body);
+  }
+
+  async start_assignment(data) {
+    var url = endpoints.review_statistics.url;
+    if (data && data.id) url = url + '/' + data.id + '/start';
+    
+    return await http(this.token, endpoints.start_assignment.method, url, data, endpoints.start_assignment.body);
+  }
+
+  async update_study_material(data) {
+    return await http(this.token, endpoints.update_study_material.method, endpoints.update_study_material.url, data, endpoints.update_study_material.body);
   }
 }
