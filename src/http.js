@@ -22,7 +22,11 @@ module.exports = async function req(token, method, endpoint, data=null, body=nul
       }
     }
     if (data.body) {
-      body[body] = data.body;
+      if (body) {
+        body[body] = data.body;
+      } else {
+        body = data.body;
+      }
     }
   }
 
