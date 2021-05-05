@@ -82,7 +82,7 @@ There are no functions pertaining to a `Collection` object.
 ### Examples
 
 ```javascript
-const wk = require('wk-wrapper');
+const wk = require('wanikani.js');
 
 const member = new wk.Member('USER_TOKEN');
 
@@ -90,7 +90,7 @@ console.log(await member.user.username); // Will return the username associated 
 ```
 
 ```javascript
-const wk = require('wk-wrapper');
+const wk = require('wanikani.js');
 
 const member = new wk.Collection('USER_TOKEN');
 
