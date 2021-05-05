@@ -18,7 +18,7 @@ class Http {
     if (data) {
       if (data.revision) headers['Wanikani-Revision'] = data.revision;
       if (data.modified) headers['If-Modified-Since'] = data.modified;
-      if (data.modified) headers['If-None-Match'] = data.nonematch;
+      if (data.nonematch) headers['If-None-Match'] = data.nonematch;
       
       if (data.filter) {
         url = url + '?';
@@ -27,8 +27,6 @@ class Http {
         }
       }
     }
-
-    console.log(url);
 
     try {
       response = await axios.get(url, { headers: headers });
@@ -43,7 +41,7 @@ class Http {
     return response.data;
   }
 
-  static async post(token, url, data) {
+  static async put(token, url, data) {
     var response;
     var headers = {
       Authorization: 'Bearer ' + token
@@ -53,6 +51,7 @@ class Http {
     if (data) {
       if (data.revision) headers['Wanikani-Revision'] = data.revision;
       if (data.modified) headers['If-Modified-Since'] = data.modified;
+      if (data.nonematch) headers['If-None-Match'] = data.nonematch;
 
       if (data.filter) {
         url = url + '?';
@@ -67,6 +66,42 @@ class Http {
 
     try {
       response = await axios.get(url, { headers: headers });
+    } catch(err) {
+      if(!err.response) return err;
+
+      return err.response.data;
+    }
+
+    if(!response) return false;
+
+    return response.data;
+  }
+  
+  static async post(token, url, data) {
+    var response;
+    var headers = {
+      Authorization: 'Bearer ' + token
+    };
+    var body = {};
+
+    if (data) {
+      if (data.revision) headers['Wanikani-Revision'] = data.revision;
+      if (data.modified) headers['If-Modified-Since'] = data.modified;
+      if (data.nonematch) headers['If-None-Match'] = data.nonematch;
+
+      if (data.filter) {
+        url = url + '?';
+        for (const key in data.filter) {
+          url = url + key + '=' + data.filter[key] + '&';
+        }
+      }
+      if (data.body) {
+        body[config.endpoints.create_review.body] = data.body;
+      }
+    }
+
+    try {
+      response = await axios.put(url, { headers: headers });
     } catch(err) {
       if(!err.response) return err;
 
