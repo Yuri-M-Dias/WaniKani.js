@@ -1,7 +1,7 @@
 const axios = require('axios');
 const config = require('../config.json');
 
-module.exports = async function req(token, method, endpoint, data=null, body=null) {
+module.exports = async function req(token, method, endpoint, data=null, body_value=null) {
   var url = config.baseURL + endpoint;
   
   var headers = {
@@ -21,76 +21,32 @@ module.exports = async function req(token, method, endpoint, data=null, body=nul
       }
     }
     if (data.body) {
-      if (body) {
-        body[body] = data.body;
+      if (body_value) {
+        body[body_value] = data.body;
       } else {
         body = data.body;
       }
     }
   }
 
-  if (typeof(Http[method]) === 'function') return Http[method](url, headers, body);
-  else return false;
-}
-
-class Http {
-  static async get(url, headers) {
-    var response;
-
-    try {
-      response = await axios.get(url, { headers: headers });
-    } catch(err) {
-      if(!err.response) return err;
-
-      return err.response.data;
-    }
-
-    if(!response) return false;
-
-    return response.data;
-  }
-
-  static async post(url, headers, body) {
   var response;
 
-    try {
-      response = await axios.post(
-        url,
-        {
-          headers: headers,
-          body: body
-        }
-      );
-    } catch(err) {
-      if(!err.response) return err;
+  console.log(body)
 
-      return err.response.data;
-    }
+  try {
+    response = await axios({
+      method: method,
+      url: url,
+      headers: headers,
+      data: body
+    });
+  } catch(err) {
+    if(!err.response) return err;
 
-    if(!response) return false;
-
-    return response.data;
+    return err.response.data;
   }
-  
-  static async put(url, headers, body) {
-    var response;
-    
-    try {
-      response = await axios.put(
-        url,
-        {
-          headers: headers,
-          body: body
-        }
-      );
-    } catch(err) {
-      if(!err.response) return err;
 
-      return err.response.data;
-    }
+  if(!response) return false;
 
-    if(!response) return false;
-
-    return response.data;
-  }
+  return response.data;
 }

@@ -68,7 +68,7 @@
     "update_user": {
       "url": "/user",
       "method": "put",
-      "body": "user"
+      "body": ["user", "preferences"]
     }
   },
   "days": [
