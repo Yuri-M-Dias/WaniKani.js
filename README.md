@@ -162,7 +162,7 @@ Following is a list of all `Endpoint` functions:
 > - A `revision` value will be parsed to select data from a specific WaniKani revision. https://docs.api.wanikani.com/20170710/#revisions-aka-versioning
 > - A `filter` object will be parsed to include all values inside the GET request. For example, the following would be parsed as `?subject_ids=6,page_after_id=2`:
 ```
-filter {
+filter: {
   subject_ids: 6,
   page_after_id: 2
 }
