@@ -14,23 +14,53 @@ module.exports = class Member {
     this.summary = this.endpoint.summary();
   }
   
+  /**
+   * Accepts an object of user preferences and updates the Member's user accordingly.
+   * See https://docs.api.wanikani.com/20170710/#update-user-information
+   */
   async update_user(data) {
+    if (!data) return false;
+
     return await this.endpoint.update_user(data);
   }
 
-  async start_assignment() {
-    return await this.endpoint.start_assignment(data);
+  /**
+   * Starts an assignment (selected by given ID) for the Member's user.
+   * See https://docs.api.wanikani.com/20170710/#start-an-assignment
+   */
+  async start_assignment(id, data) {
+    if (!id) return false;
+
+    return await this.endpoint.start_assignment(id, data);
   }
 
+  /**
+   * Create a review for the Member's user.
+   * See https://docs.api.wanikani.com/20170710/#create-a-review
+   */
   async create_review(data) {
+    if (!data) return false;
+
     return await this.endpoint.create_review(data);
   }
 
+  /**
+   * Create a study material for the Member's user.
+   * See https://docs.api.wanikani.com/20170710/#create-a-study-material
+   */
   async create_study_material(data) {
+    if (!data) return false;
+
     return await this.endpoint.create_study_material(data);
   }
 
-  async update_study_material() {
-    return await this.endpoint.update_study_material(data);
+  /**
+   * Update a study material (selected by ID) for the Member's user.
+   * See https://docs.api.wanikani.com/20170710/#create-a-study-material
+   */
+  async update_study_material(id, data) {
+    if (!id || !data) return false;
+
+    return await this.endpoint.update_study_material(id,data);
   }
 }
