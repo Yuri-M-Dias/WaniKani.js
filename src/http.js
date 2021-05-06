@@ -1,13 +1,12 @@
 const axios = require('axios');
 const config = require('../config.json');
 
-module.exports = async function req(token, method, endpoint, data=null, body_value=null) {
+module.exports = async function req(token, method, endpoint, data=null, body=null) {
   var url = config.baseURL + endpoint;
   
   var headers = {
     Authorization: 'Bearer ' + token
   };
-  var body = {};
 
   if (data) {
     if (data.revision) headers['Wanikani-Revision'] = data.revision;
@@ -20,18 +19,9 @@ module.exports = async function req(token, method, endpoint, data=null, body_val
         url = url + key + '=' + data.filter[key] + '&';
       }
     }
-    if (data.body) {
-      if (body_value) {
-        body[body_value] = data.body;
-      } else {
-        body = data.body;
-      }
-    }
   }
 
   var response;
-
-  console.log(body)
 
   try {
     response = await axios({

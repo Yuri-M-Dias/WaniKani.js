@@ -130,23 +130,51 @@ module.exports = class Endpoints {
    * Create a study material for a user.
   */
   async create_study_material(data) {
-    if (!data || !data.subject_id) return false;
+    if (!data || !data.data || !data.data.subject_id) return false;
 
-    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, endpoints.create_study_material.body);
+    var body = {};
+
+    body = data.data;
+
+    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, body);
   }
   
   async update_user(data) {
-    return await http(this.token, endpoints.update_user.method, endpoints.update_user.url, data, endpoints.update_user.body);
+    var body = {
+      "user": {}
+    };
+
+    try {
+      if (data.data) {
+        body.user.preferences = data.data;
+      }
+    } catch(err) {
+      return false;
+    }
+
+    return await http(this.token, endpoints.update_user.method, endpoints.update_user.url, data, body);
   }
 
   async start_assignment(data) {
     var url = endpoints.review_statistics.url;
     if (data && data.id) url = url + '/' + data.id + '/start';
+
+    var body = {};
+
+    if (data.data) {
+      body = data.data;
+    }
     
-    return await http(this.token, endpoints.start_assignment.method, url, data, endpoints.start_assignment.body);
+    return await http(this.token, endpoints.start_assignment.method, url, data, body);
   }
 
   async update_study_material(data) {
+    var body = {};
+
+    if (data.data) {
+      body['study_material'] = data.data;
+    }
+
     return await http(this.token, endpoints.update_study_material.method, endpoints.update_study_material.url, data, endpoints.update_study_material.body);
   }
 }
