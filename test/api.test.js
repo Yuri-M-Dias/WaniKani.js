@@ -1,14 +1,16 @@
-'use strict';
+"use strict";
 
 require("dotenv").config();
-const chai = require("chai"), expect = chai.expect, should = chai.should(),
+const chai = require("chai"),
+  expect = chai.expect,
+  should = chai.should(),
   assert = chai.assert;
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
 const apikey = process.env.WK_API_KEY;
 
-const Member = require('../').Member;
+const Member = require("../").Member;
 
 describe("ワンカニ API client", () => {
   let client = null;

@@ -1,15 +1,17 @@
 # WaniKani.js
+
 ## A Node.js Wrapper for the WaniKani API
 
 > This library is usable, but still under construction. If you experience a bug, please report it under Github issues on our repo: https://github.com/zmontgo/Nodejs-WaniKani/issues.
 
 ## Table of Contents
+
 > - [Table of Contents](#table-of-contents)
 > - [Description](#description)
 > - [Data Groups](#data-groups)
-> > - [Members](#member)
-> > - [Collections](#collections)
-> > - [Examples](#examples)
+>   > - [Members](#member)
+>   > - [Collections](#collections)
+>   > - [Examples](#examples)
 > - [Endpoints](#endpoints)
 > - [Utilities](#utilities)
 
@@ -20,6 +22,7 @@ A very thin wrapper between the WaniKani API and your Node.js application.
 As with most wrappers, its strengths are twofold: simplifying and parsing. **This wrapper does not cache data for you.**
 
 ## Data Groups
+
 Since it's very likely you will want to cache large amounts of data, WaniKani.js offers two data groups that contain all information pertaining to either WaniKani as a whole (`Collection`) or a specific user (`Member`). Avoid calling these too often, as they simulteneously call many endpoints. Instead, use these solely for caching, and update your cache periodically with the returned timestamp.
 
 A `Collection` object contains WaniKani's spaced repetition systems, subjects, and voice actors. A `Member` object contains information pertaining to a specific user from WaniKani, including user information, progressions, resets, reviews, review statistics, study materials, and summaries. Both objects require a WaniKani user token to be selected, or they will return a `401 Unauthorized` error.
@@ -51,15 +54,15 @@ Creating a `Member` object also allows specifying filters that are applied to ev
 Additionally, you may update a WaniKani user as appropriate with the following functions:
 
 ```javascript
-  Member.update_user(data); // https://docs.api.wanikani.com/20170710/#update-user-information
+Member.update_user(data); // https://docs.api.wanikani.com/20170710/#update-user-information
 
-  Member.start_assignment(data); // https://docs.api.wanikani.com/20170710/#start-an-assignment
+Member.start_assignment(data); // https://docs.api.wanikani.com/20170710/#start-an-assignment
 
-  Member.create_review(data); // https://docs.api.wanikani.com/20170710/#create-a-review
+Member.create_review(data); // https://docs.api.wanikani.com/20170710/#create-a-review
 
-  Member.create_study_material(data); // https://docs.api.wanikani.com/20170710/#create-a-study-material
+Member.create_study_material(data); // https://docs.api.wanikani.com/20170710/#create-a-study-material
 
-  Member.update_study_material(data); // https://docs.api.wanikani.com/20170710/#update-a-study-material
+Member.update_study_material(data); // https://docs.api.wanikani.com/20170710/#update-a-study-material
 ```
 
 As this is a very thin wrapper, we do not do any form of validation before attempting to update these values. Please reference the WaniKani API documentation for best practices and expected data for these functions. https://docs.api.wanikani.com/20170710/#respecting-subscription-restrictions
@@ -82,9 +85,9 @@ There are no functions pertaining to a `Collection` object.
 ### Examples
 
 ```javascript
-const wk = require('wanikani.js');
+const wk = require("wanikani.js");
 
-const member = new wk.Member('USER_TOKEN');
+const member = new wk.Member("USER_TOKEN");
 
 const user = await member.user;
 
@@ -92,9 +95,9 @@ console.log(user.username); // Will return the username associated with the user
 ```
 
 ```javascript
-const wk = require('wanikani.js');
+const wk = require("wanikani.js");
 
-const member = new wk.Collection('USER_TOKEN');
+const member = new wk.Collection("USER_TOKEN");
 
 console.log(await member.srs); // Will return the below JSON
 ```
@@ -134,35 +137,37 @@ Example Console Output
 Following is a list of all `Endpoint` functions:
 
 ```javascript
-  Endpoints.assignments(data); // Gets a single assignment, specified by ID, or a list of all assignments if ID is not included.
+Endpoints.assignments(data); // Gets a single assignment, specified by ID, or a list of all assignments if ID is not included.
 
-  Endpoints.progressions(data); // Gets a single progression pertaining to a user, specified by ID, or a list of all progressions pertaining to a user if ID is not included.
+Endpoints.progressions(data); // Gets a single progression pertaining to a user, specified by ID, or a list of all progressions pertaining to a user if ID is not included.
 
-  Endpoints.resets(data); // Gets information about a user's resets.
+Endpoints.resets(data); // Gets information about a user's resets.
 
-  Endpoints.reviews(data); // Gets information about a user's resets.
+Endpoints.reviews(data); // Gets information about a user's resets.
 
-  Endpoints.create_review(data); // Create a review for a user.
+Endpoints.create_review(data); // Create a review for a user.
 
-  Endpoints.review_stats(data); // Gets information about a user's review statistics.
+Endpoints.review_stats(data); // Gets information about a user's review statistics.
 
-  Endpoints.study_materials(data); // Gets information about a user's study materials.
+Endpoints.study_materials(data); // Gets information about a user's study materials.
 
-  Endpoints.subjects(data); // Gets information about WaniKani's subjects.
+Endpoints.subjects(data); // Gets information about WaniKani's subjects.
 
-  Endpoints.summary(data); // Gets a summary of a user's upcoming lessons for a user.
+Endpoints.summary(data); // Gets a summary of a user's upcoming lessons for a user.
 
-  Endpoints.srs(data); // Gets information about general spaced repetition systems.
+Endpoints.srs(data); // Gets information about general spaced repetition systems.
 
-  Endpoints.user(data); // Gets general information pertaining to a specific user.
+Endpoints.user(data); // Gets general information pertaining to a specific user.
 
-  Endpoints.voice_actors(data); // Gets information about WaniKani's voice actors.
+Endpoints.voice_actors(data); // Gets information about WaniKani's voice actors.
 ```
 
 `data` is a JSON object containing filters.
+
 > - An `id` value will be parsed to select only that specific id (for instance, selecting a single assignment by ID, rather than all assignments).
 > - A `revision` value will be parsed to select data from a specific WaniKani revision. https://docs.api.wanikani.com/20170710/#revisions-aka-versioning
 > - A `filter` object will be parsed to include all values inside the GET request. For example, the following would be parsed as `?subject_ids=6,page_after_id=2`:
+
 ```
 filter: {
   subject_ids: 6,

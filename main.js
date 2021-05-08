@@ -1,15 +1,15 @@
-'use strict';
+"use strict";
 
-const utils = require('./src/utils');
+const utils = require("./src/utils");
 
 module.exports = {
   /* Data grouping functions */
-  Collection: require('./src/collection'),
-  Member: require('./src/member'),
+  Collection: require("./src/collection"),
+  Member: require("./src/member"),
 
   /* Specific data functions */
-  Endpoints: require('./src/endpoints'),
+  Endpoints: require("./src/endpoints"),
 
   /* Utilility functions */
-  ParseDate: utils.parseDate 
-}
+  ParseDate: utils.parseDate,
+};

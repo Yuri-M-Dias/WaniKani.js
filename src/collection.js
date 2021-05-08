@@ -1,7 +1,7 @@
-const endpoints = require('./endpoints');
+const endpoints = require("./endpoints");
 
 module.exports = class Collection {
-  constructor (token) {
+  constructor(token) {
     const endpoint = new endpoints(token);
 
     this.timestamp = new Date();
@@ -9,4 +9,4 @@ module.exports = class Collection {
     this.subject = endpoint.subjects;
     this.voice_actors = endpoint.voice_actors;
   }
-}
+};

@@ -71,15 +71,7 @@
       "body": ["user", "preferences"]
     }
   },
-  "days": [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat"
-  ],
+  "days": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
   "months": [
     "Jan",
     "Feb",

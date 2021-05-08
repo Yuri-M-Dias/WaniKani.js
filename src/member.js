@@ -1,7 +1,7 @@
-const endpoints = require('./endpoints');
+const endpoints = require("./endpoints");
 
 module.exports = class Member {
-  constructor (token) {
+  constructor(token) {
     this.token = token;
     this.timestamp = new Date();
     this.endpoint = new endpoints(token);
@@ -19,7 +19,8 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#update-user-information
    */
   async update_user(data) {
-    if (!data) return Promise.reject(new Error("Need the data that will be updated"));
+    if (!data)
+      return Promise.reject(new Error("Need the data that will be updated"));
     return await this.endpoint.update_user(data);
   }
 
@@ -55,7 +56,8 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
    */
   async update_study_material(id, data) {
-    if (!id || !data) return Promise.reject(new Error("Need the ID and updated material data"));
-    return await this.endpoint.update_study_material(id,data);
+    if (!id || !data)
+      return Promise.reject(new Error("Need the ID and updated material data"));
+    return await this.endpoint.update_study_material(id, data);
   }
-}
+};

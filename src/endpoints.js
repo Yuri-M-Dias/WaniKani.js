@@ -1,5 +1,5 @@
-const http = require('./http');
-const endpoints = require('../config.json').endpoints;
+const http = require("./http");
+const endpoints = require("../config.json").endpoints;
 
 module.exports = class Endpoints {
   constructor(token) {
@@ -11,7 +11,7 @@ module.exports = class Endpoints {
    */
   async assignments(data) {
     var url = endpoints.assignments.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.assignments.method, url, data);
   }
@@ -21,17 +21,22 @@ module.exports = class Endpoints {
    */
   async progressions(data) {
     var url = endpoints.level_progressions.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
-    return await http(this.token, endpoints.level_progressions.method, url, data);
+    return await http(
+      this.token,
+      endpoints.level_progressions.method,
+      url,
+      data
+    );
   }
 
   /**
    * Gets information about a user's resets.
    */
-   async resets(data) {
+  async resets(data) {
     var url = endpoints.resets.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.resets.method, url, data);
   }
@@ -39,9 +44,9 @@ module.exports = class Endpoints {
   /**
    * Gets information about a user's resets.
    */
-   async reviews(data) {
+  async reviews(data) {
     var url = endpoints.reviews.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.reviews.method, url, data);
   }
@@ -49,19 +54,24 @@ module.exports = class Endpoints {
   /**
    * Gets information about a user's review statistics.
    */
-   async review_stats(data) {
+  async review_stats(data) {
     var url = endpoints.review_statistics.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
-    return await http(this.token, endpoints.review_statistics.method, url, data);
+    return await http(
+      this.token,
+      endpoints.review_statistics.method,
+      url,
+      data
+    );
   }
 
   /**
    * Gets information about a user's study materials.
    */
-   async study_materials(data) {
+  async study_materials(data) {
     var url = endpoints.study_materials.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.study_materials.method, url, data);
   }
@@ -71,7 +81,7 @@ module.exports = class Endpoints {
    */
   async subjects(data) {
     var url = endpoints.subjects.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.subjects.method, url, data);
   }
@@ -79,9 +89,9 @@ module.exports = class Endpoints {
   /**
    * Gets a summary of a user's upcoming lessons for a user.
    */
-   async summary(data) {
+  async summary(data) {
     var url = endpoints.summary.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.summary.method, url, data);
   }
@@ -89,9 +99,9 @@ module.exports = class Endpoints {
   /**
    * Gets information about general spaced repetition systems.
    */
-   async srs(data) {
+  async srs(data) {
     var url = endpoints.srs.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.srs.method, url, data);
   }
@@ -100,16 +110,21 @@ module.exports = class Endpoints {
    * Gets general information pertaining to a specific user.
    */
   async user(data) {
-    var response = await http(this.token, endpoints.user.method, endpoints.user.url, data);
+    var response = await http(
+      this.token,
+      endpoints.user.method,
+      endpoints.user.url,
+      data
+    );
     return response.data;
   }
 
   /**
    * Gets information about WaniKani's voice actors.
    */
-   async voice_actors(data) {
+  async voice_actors(data) {
     var url = endpoints.voice_actors.url;
-    if (data && data.id) url = url + '/' + data.id;
+    if (data && data.id) url = url + "/" + data.id;
 
     return await http(this.token, endpoints.voice_actors.method, url, data);
   }
@@ -119,25 +134,38 @@ module.exports = class Endpoints {
    * See https://docs.api.wanikani.com/20170710/#create-a-review
    */
   async create_review(data) {
-    if (!data || !data.assignment_id || !data.subject_id || !data.incorrect_meaning_answers || !data.incorrect_reading_answers) return false;
+    if (
+      !data ||
+      !data.assignment_id ||
+      !data.subject_id ||
+      !data.incorrect_meaning_answers ||
+      !data.incorrect_reading_answers
+    )
+      return false;
 
     var body = {
-      review: {}
+      review: {},
     };
 
     try {
       body.review = data;
-    } catch(err) {
+    } catch (err) {
       return false;
     }
 
-    return await http(this.token, endpoints.create_review.method, endpoints.create_review.url, data, body);
+    return await http(
+      this.token,
+      endpoints.create_review.method,
+      endpoints.create_review.url,
+      data,
+      body
+    );
   }
 
   /**
    * Create a study material for the Endpoint's user.
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
-  */
+   */
   async create_study_material(data) {
     if (!data || !data.data || !data.data.subject_id) return false;
 
@@ -145,7 +173,13 @@ module.exports = class Endpoints {
 
     body = data.data;
 
-    return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, body);
+    return await http(
+      this.token,
+      endpoints.create_study_material.method,
+      endpoints.create_study_material.url,
+      data,
+      body
+    );
   }
 
   /**
@@ -157,10 +191,16 @@ module.exports = class Endpoints {
 
     var body = {
       user: {
-        preferences: data
-      }
+        preferences: data,
+      },
     };
-    return await http(this.token, endpoints.update_user.method, endpoints.update_user.url, data, body);
+    return await http(
+      this.token,
+      endpoints.update_user.method,
+      endpoints.update_user.url,
+      data,
+      body
+    );
   }
 
   /**
@@ -171,7 +211,7 @@ module.exports = class Endpoints {
     var url = endpoints.review_statistics.url;
 
     if (!id) return false;
-    if (id) url = url + '/' + id + '/start';
+    if (id) url = url + "/" + id + "/start";
 
     var body = {};
 
@@ -179,11 +219,17 @@ module.exports = class Endpoints {
       if (data) {
         body = data;
       }
-    } catch(err) {
+    } catch (err) {
       return false;
     }
 
-    return await http(this.token, endpoints.start_assignment.method, url, data, body);
+    return await http(
+      this.token,
+      endpoints.start_assignment.method,
+      url,
+      data,
+      body
+    );
   }
 
   /**
@@ -192,17 +238,23 @@ module.exports = class Endpoints {
    */
   async update_study_material(data) {
     var body = {
-      study_material: {}
+      study_material: {},
     };
 
     try {
       if (data) {
         body.study_material = data;
       }
-    } catch(err) {
+    } catch (err) {
       return false;
     }
 
-    return await http(this.token, endpoints.update_study_material.method, endpoints.update_study_material.url, data, body);
+    return await http(
+      this.token,
+      endpoints.update_study_material.method,
+      endpoints.update_study_material.url,
+      data,
+      body
+    );
   }
-}
+};
