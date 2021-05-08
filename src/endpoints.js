@@ -141,17 +141,11 @@ module.exports = class Endpoints {
       !data.incorrect_meaning_answers ||
       !data.incorrect_reading_answers
     )
-      return false;
+      return Promise.reject(new Error("Need user data to update."));
 
     var body = {
-      review: {},
+      review: data
     };
-
-    try {
-      body.review = data;
-    } catch (err) {
-      return false;
-    }
 
     return await http(
       this.token,
@@ -167,12 +161,13 @@ module.exports = class Endpoints {
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
    */
   async create_study_material(data) {
-    if (!data || !data.data || !data.data.subject_id) return false;
+    if (!data || !data.data || !data.data.subject_id) {
+      return Promise.reject(new Error("Need material data and subject ID"));
+    }
 
-    var body = {};
-
-    body = data.data;
-
+    var body = {
+      data: data
+    };
     return await http(
       this.token,
       endpoints.create_study_material.method,
@@ -191,8 +186,8 @@ module.exports = class Endpoints {
 
     var body = {
       user: {
-        preferences: data,
-      },
+        preferences: data
+      }
     };
     return await http(
       this.token,
@@ -210,18 +205,10 @@ module.exports = class Endpoints {
   async start_assignment(id, data) {
     var url = endpoints.review_statistics.url;
 
-    if (!id) return false;
+    if (!id) return Promise.reject(new Error("Need assignment ID"));
     if (id) url = url + "/" + id + "/start";
 
-    var body = {};
-
-    try {
-      if (data) {
-        body = data;
-      }
-    } catch (err) {
-      return false;
-    }
+    var body = data;
 
     return await http(
       this.token,
@@ -237,18 +224,10 @@ module.exports = class Endpoints {
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
    */
   async update_study_material(data) {
+    if (!data) return Promise.reject(new Error("Need study material data"));
     var body = {
-      study_material: {},
+      study_material: data
     };
-
-    try {
-      if (data) {
-        body.study_material = data;
-      }
-    } catch (err) {
-      return false;
-    }
-
     return await http(
       this.token,
       endpoints.update_study_material.method,
