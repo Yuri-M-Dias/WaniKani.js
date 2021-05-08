@@ -5,8 +5,8 @@ module.exports = class Collection {
     const endpoint = new endpoints(token);
 
     this.timestamp = new Date();
-    this.srs = endpoint.srs();
-    this.subject = endpoint.subjects();
-    this.voice_actors = endpoint.voice_actors();
+    this.srs = endpoint.srs;
+    this.subject = endpoint.subjects;
+    this.voice_actors = endpoint.voice_actors;
   }
 }

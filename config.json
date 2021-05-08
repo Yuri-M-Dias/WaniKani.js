@@ -31,7 +31,7 @@
     },
     "summary": {
       "url": "/summary",
-      "method": "summary"
+      "method": "get"
     },
     "srs": {
       "url": "/spaced_repetition_systems",

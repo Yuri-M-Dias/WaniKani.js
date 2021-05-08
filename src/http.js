@@ -3,7 +3,7 @@ const config = require('../config.json');
 
 module.exports = async function req(token, method, endpoint, data=null, body=null) {
   var url = config.baseURL + endpoint;
-  
+
   var headers = {
     Authorization: 'Bearer ' + token
   };
@@ -31,12 +31,12 @@ module.exports = async function req(token, method, endpoint, data=null, body=nul
       data: body
     });
   } catch(err) {
-    if(!err.response) return err;
+    if(!err.response) return Promise.reject(err);;
 
-    return err.response.data;
+    return Promise.reject(err.response.data);
   }
 
-  if(!response) return false;
+  if(!response) return Promise.reject(new Error("No response."));
 
   return response.data;
 }

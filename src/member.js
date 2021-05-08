@@ -5,22 +5,21 @@ module.exports = class Member {
     this.token = token;
     this.timestamp = new Date();
     this.endpoint = new endpoints(token);
-    this.user = this.endpoint.user();
-    this.lessons = this.endpoint.progressions();
-    this.resets = this.endpoint.resets();
-    this.reviews = this.endpoint.reviews();
-    this.review_statistics = this.endpoint.review_stats();
-    this.study_materials = this.endpoint.study_materials();
-    this.summary = this.endpoint.summary();
+    this.user = this.endpoint.user;
+    this.lessons = this.endpoint.progressions;
+    this.resets = this.endpoint.resets;
+    this.reviews = this.endpoint.reviews;
+    this.review_statistics = this.endpoint.review_stats;
+    this.study_materials = this.endpoint.study_materials;
+    this.summary = this.endpoint.summary;
   }
-  
+
   /**
    * Accepts an object of user preferences and updates the Member's user accordingly.
    * See https://docs.api.wanikani.com/20170710/#update-user-information
    */
   async update_user(data) {
-    if (!data) return false;
-
+    if (!data) return Promise.reject(new Error("Need the data that will be updated"));
     return await this.endpoint.update_user(data);
   }
 
@@ -29,8 +28,7 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#start-an-assignment
    */
   async start_assignment(id, data) {
-    if (!id) return false;
-
+    if (!id) return Promise.reject(new Error("Need id to start assignment"));
     return await this.endpoint.start_assignment(id, data);
   }
 
@@ -39,8 +37,7 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#create-a-review
    */
   async create_review(data) {
-    if (!data) return false;
-
+    if (!data) return Promise.reject(new Error("Need the review data"));
     return await this.endpoint.create_review(data);
   }
 
@@ -49,8 +46,7 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
    */
   async create_study_material(data) {
-    if (!data) return false;
-
+    if (!data) return Promise.reject(new Error("Need the material data"));
     return await this.endpoint.create_study_material(data);
   }
 
@@ -59,8 +55,7 @@ module.exports = class Member {
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
    */
   async update_study_material(id, data) {
-    if (!id || !data) return false;
-
+    if (!id || !data) return Promise.reject(new Error("Need the ID and updated material data"));
     return await this.endpoint.update_study_material(id,data);
   }
 }

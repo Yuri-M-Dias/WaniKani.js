@@ -101,10 +101,7 @@ module.exports = class Endpoints {
    */
   async user(data) {
     var response = await http(this.token, endpoints.user.method, endpoints.user.url, data);
-
-    if (response.data) response = response.data;
-
-    return response;
+    return response.data;
   }
 
   /**
@@ -116,7 +113,7 @@ module.exports = class Endpoints {
 
     return await http(this.token, endpoints.voice_actors.method, url, data);
   }
-  
+
   /**
    * Create a review for the Endpoint's user.
    * See https://docs.api.wanikani.com/20170710/#create-a-review
@@ -136,7 +133,7 @@ module.exports = class Endpoints {
 
     return await http(this.token, endpoints.create_review.method, endpoints.create_review.url, data, body);
   }
-  
+
   /**
    * Create a study material for the Endpoint's user.
    * See https://docs.api.wanikani.com/20170710/#create-a-study-material
@@ -150,27 +147,19 @@ module.exports = class Endpoints {
 
     return await http(this.token, endpoints.create_study_material.method, endpoints.create_study_material.url, data, body);
   }
-  
+
   /**
    * Accepts an object of user preferences and updates the user pertaining to the Endpoint accordingly.
    * See https://docs.api.wanikani.com/20170710/#update-user-information
    */
   async update_user(data) {
+    if (!data) return Promise.reject(new Error("Need data fields to update"));
+
     var body = {
       user: {
-        preferences: {
-        }
+        preferences: data
       }
     };
-
-    try {
-      if (data) {
-        body.user.preferences = data;
-      }
-    } catch(err) {
-      return false;
-    }
-
     return await http(this.token, endpoints.update_user.method, endpoints.update_user.url, data, body);
   }
 
@@ -193,7 +182,7 @@ module.exports = class Endpoints {
     } catch(err) {
       return false;
     }
-    
+
     return await http(this.token, endpoints.start_assignment.method, url, data, body);
   }
 
