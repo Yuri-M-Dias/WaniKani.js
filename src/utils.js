@@ -1,14 +1,8 @@
 const config = require("../config.json");
 
 module.exports.parseDate = async function parseDate(data) {
-  try {
-    var parsed = Date.parse(data);
-  } catch {
-    return false;
-  }
-
+  var parsed = Date.parse(data);
   var date = new Date(parsed);
-
   var day = config.days[date.getDay()];
   var month = config.months[date.getMonth()];
   var hours =
